@@ -22,7 +22,7 @@ default_args = {
 with DAG(
     dag_id="X_crawling_makeup_daily",
     default_args=default_args,
-    start_date=datetime(2026,1,27),
+    start_date=datetime(2026,1,28),
     schedule="0 23 * * *",
     catchup=False,
     tags=["X_crawling"],
@@ -34,16 +34,15 @@ with DAG(
         on_success_callback = None
     )
 
-    task_1 = PythonOperator(
+    task_1 = BashOperator(
         task_id = "makeup_crawling",
         bash_command = "python3 /opt/airflow/app/japantwitter_makeup_crawling/makeup_daily.py"
     )
 
-    task_2 = PythonOperator(
+    task_2 = BashOperator(
         task_id = "mc4_daily",
-        bash_command = "python3 /opt/airflow/app/japan_mc4_daily_copy/mc4_daily.py"
+        bash_command = "python3 /opt/airflow/app/japan_mc4_daily/mc4_daily.py"
     )
 
-    start >> task_1
-    start >> task_2
-
+    start_dag >> task_1
+    start_dag >> task_2

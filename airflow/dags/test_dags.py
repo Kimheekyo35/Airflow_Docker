@@ -19,25 +19,16 @@ default_args = {
     'retry_delay':timedelta(minutes=5)
 }
 
-with DAG(
-    dag_id="Bussiness_Support_Team",
-    default_args=default_args,
-    start_date=datetime(2026,1,29),
-    schedule="0 1 * * *",
-    catchup=False,
-    tags=["Bussiness_Support"],
 
+with DAG(
+    dag_id="test_dag",
+    default_args=default_args,
+    start_date=datetime(2026,1,28)
 ) as dag:
 
-    start_dag = PythonOperator(
-        task_id = 'start_alarm',
-        python_callable = start,
-        on_success_callback = None
+    start_dag = BashOperator(
+        task_id ="test",
+        bash_command = "python3 /opt/airflow/app/japan_mc4_daily_copy/mc4_daily.py"
     )
 
-    task_1 = BashOperator(
-        task_id = 'collect_to_email',
-        bash_command = 'python3 /opt/airflow/app/business_support_team_wema/10_daily_check_sheet_to_email.py'
-    )
-
-    start_dag >> task_1
+    start_dag

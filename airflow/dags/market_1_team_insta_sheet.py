@@ -20,24 +20,21 @@ default_args = {
 }
 
 with DAG(
-    dag_id="Bussiness_Support_Team",
+    dag_id="market_1_team_insta_sheet",
     default_args=default_args,
-    start_date=datetime(2026,1,29),
-    schedule="0 1 * * *",
-    catchup=False,
-    tags=["Bussiness_Support"],
-
+    start_date=datetime(2026,1,28),
+    schedule="30 22 * * *",
+    tags = ["market_1_team_insta"]
 ) as dag:
 
     start_dag = PythonOperator(
-        task_id = 'start_alarm',
-        python_callable = start,
-        on_success_callback = None
+        task_id = "start_alarm",
+        python_callable = start
     )
 
     task_1 = BashOperator(
-        task_id = 'collect_to_email',
-        bash_command = 'python3 /opt/airflow/app/business_support_team_wema/10_daily_check_sheet_to_email.py'
+        task_id = "insta_sheet",
+        bash_command = "python3 /opt/airflow/app/market_1nd_team/01.insta_sheet/08_insta_crawling.py"
     )
 
     start_dag >> task_1

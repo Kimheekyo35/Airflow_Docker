@@ -20,13 +20,12 @@ default_args = {
 }
 
 with DAG(
-    dag_id="Bussiness_Support_Team",
-    default_args=default_args,
-    start_date=datetime(2026,1,29),
-    schedule="0 1 * * *",
-    catchup=False,
-    tags=["Bussiness_Support"],
-
+    dag_id = "market_2nd_team_tiktok_add_data",
+    default_args = default_args,
+    start_date = datetime(2026, 1, 28),
+    schedule = "0 21 * * *",
+    catchup = False,
+    tags = ["market_2nd"]
 ) as dag:
 
     start_dag = PythonOperator(
@@ -36,8 +35,13 @@ with DAG(
     )
 
     task_1 = BashOperator(
-        task_id = 'collect_to_email',
-        bash_command = 'python3 /opt/airflow/app/business_support_team_wema/10_daily_check_sheet_to_email.py'
+        task_id = 'tiktok_crawling',
+        bash_command = 'python3 /opt/airflow/app/market_2nd_team/tiktok_sheet_crawling/06_daily_2team_tiktok_sheet_update.py'
     )
 
-    start_dag >> task_1
+    task_2 = BashOperator(
+        task_id = 'add_none_crawling.py',
+        bash_command = 'python3 /opt/airflow/app/market_2nd_team/tiktok_sheet_crawling/add_none_crawling_data.py'
+    )
+
+    start_dag >> task_1 >> task_2

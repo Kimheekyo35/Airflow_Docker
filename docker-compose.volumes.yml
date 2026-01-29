@@ -1,0 +1,15 @@
+services:
+  airflow:
+    volumes:
+      - /home/linuxuser/wemarketing/Airflow_project/airflow/dags:/opt/airflow/dags
+      - /home/linuxuser/wemarketing/japantwitter_makeup_crawling:/opt/airflow/app/japantwitter_makeup_crawling
+      - /home/linuxuser/wemarketing/japan_mc4_daily:/opt/airflow/app/japan_mc4_daily
+      - /home/linuxuser/wemarketing/Airflow_project/market_3th_team:/opt/airflow/app/Airflow_project/market_3th_team
+      - /home/linuxuser/wemarketing/business_support_team_wema:/opt/airflow/app/business_support_team_wema
+      - /home/linuxuser/wemarketing/그로스_동남아_틱톡_크롤링:/opt/airflow/app/그로스_동남아_틱톡_크롤링
+      - /home/linuxuser/wemarketing/gm1/01.tiktok_sheet_crawling:/opt/airflow/app/gm1/01.tiktok_sheet_crawling
+      - /home/linuxuser/wemarketing/market_2nd_team/tiktok_sheet_crawling:/opt/airflow/app/market_2nd_team/tiktok_sheet_crawling
+      - /home/linuxuser/wemarketing/market_1nd_team/01.insta_sheet:/opt/airflow/app/market_1nd_team/01.insta_sheet
+    # 테스트용
+      - /home/linuxuser/wemarketing/japan_mc4_daily_copy:/opt/airflow/app/japan_mc4_daily_copy
+      - /home/linuxuser/wemarketing/비나우:/opt/airflow/app/비나우

@@ -3,7 +3,7 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
-.env
+*.env
 airflow_env/
 json_file/
 
@@ -30,3 +30,4 @@ docker-compose.override.yml
 
 # else
 key.py
+LOCAL_BACKUP_*.patch

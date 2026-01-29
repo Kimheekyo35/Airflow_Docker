@@ -24,7 +24,7 @@ default_args={
 with DAG(
     dag_id = "marketing_3th_daily_crawling",
     default_args=default_args,
-    start_date = datetime(2026, 1, 27),
+    start_date = datetime(2026, 1, 28),
     schedule = "0 21 * * *",   # Airflow 3.x 방식
     catchup = False,
     tags=["marketing_3th"],
@@ -41,17 +41,17 @@ with DAG(
 
     task_1 = BashOperator(
     task_id = 'x_cralwing',
-    bash_command = 'python3 /home/linuxuser/wemarketing/airflow_test/market_3th_team/07_daily_3team_x.py'
+    bash_command = 'python3 /opt/airflow/app/Airflow_project/market_3th_team/07_daily_3team_x.py'
     )
 
     task_2 = BashOperator(
         task_id = 'insta_crawling',
-        bash_command = 'python3 /home/linuxuser/wemarketing/airflow_test/market_3th_team/07_daily_3team_insta.py'
+        bash_command = 'python3 /opt/airflow/app/Airflow_project/market_3th_team/07_daily_3team_insta.py'
     )
 
     task_3 =  BashOperator(
         task_id = 'tiktok_crawling',
-        bash_command = 'python3 /home/linuxuser/wemarketing/airflow_test/market_3th_team/07_daily_3team_tiktok.py'
+        bash_command = 'python3 /opt/airflow/app/Airflow_project/market_3th_team/07_daily_3team_tiktok.py'
     )
 
 

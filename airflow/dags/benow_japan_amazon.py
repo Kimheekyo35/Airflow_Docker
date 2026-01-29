@@ -20,15 +20,14 @@ default_args = {
 }
 
 with DAG(
-    dag_id="Bussiness_Support_Team",
-    default_args=default_args,
-    start_date=datetime(2026,1,29),
-    schedule="0 1 * * *",
-    catchup=False,
-    tags=["Bussiness_Support"],
-
+    dag_id = "benow_japan_amazon_crawling",
+    default_args = default_args,
+    start_date = datetime(2026,1,28),
+    schedule = "50 22 * * *",
+    catchup = False,
+    tags=["BENOW"]
 ) as dag:
-
+    
     start_dag = PythonOperator(
         task_id = 'start_alarm',
         python_callable = start,
@@ -36,8 +35,8 @@ with DAG(
     )
 
     task_1 = BashOperator(
-        task_id = 'collect_to_email',
-        bash_command = 'python3 /opt/airflow/app/business_support_team_wema/10_daily_check_sheet_to_email.py'
+        task_id = 'benow_japan_amazon',
+        bash_command = 'python3 /opt/airflow/app/비나우/japan_amazon_crawling.py'
     )
 
     start_dag >> task_1
